@@ -1,0 +1,12 @@
+{% extends "users/base.html" %}
+{% block content %}
+  <h2>{{ currentuser.username }}'s Following</h2>
+  <div class="content-section">
+    {% for following in following %}
+    <p>
+      <img class="rounded-circle comment-img" src="{{ following.profile.image.url }}">
+      <a class="mr-2" href="{% url 'profile' following.id %}">{{ following }}</a>
+    </p>
+    {% endfor %}
+  </div>  
+{% endblock content %}

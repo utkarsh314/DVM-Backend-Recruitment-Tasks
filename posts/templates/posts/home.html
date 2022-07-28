@@ -1,0 +1,35 @@
+{% extends "users/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+  {% if not user.profile.following.all %}
+  <h2>Latest Posts</h2>
+  {% endif %}
+  {% for post in posts %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'profile' post.author.id %}">{{ post.author }}</a>
+        <small class="text-muted mr-2">{{ post.date_posted|date:"F d, Y" }}</small>
+        {% if post.edited %}
+        <small class="text-muted"><i>Edited</i></small>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-content">{{ post.body }}</p>
+      <a class="fa-regular fa-comments comment-button" href="{% url 'comments' post.id %}"></a>
+      {% if post.comment_set.all %}
+      <span class="comment-button">{{ post.comment_set.all.count }}</span>
+      {% endif %}
+    </div>
+    {% if post.author != user and user.profile not in post.reports.all %}
+    <a class="fa-regular fa-flag report-flag" href="{% url 'report' post.id %}"></a>
+    {% elif user.profile in post.reports.all %}
+    <i class="fa-solid fa-flag report-flag"></i>
+    {% endif %}
+  </article>
+  {% endfor %}
+{% else %}
+  Please log in or register to continue!
+{% endif %}
+{% endblock content %}

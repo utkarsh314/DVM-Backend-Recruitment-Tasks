@@ -1,0 +1,66 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ currentuser.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">
+          {{ currentuser.username }} 
+          {% if currentuser != user %}
+            {% if currentuser not in user.profile.following.all %}
+              <a class="btn btn-secondary btn-sm follow-btn" href="{% url 'follow' currentuser.id %}">Follow</a>
+            {% else %}
+              <a class="btn btn-primary btn-sm follow-btn" href="{% url 'follow' currentuser.id %}">Followed</a>
+            {% endif %}
+            {% if currentuser not in user.profile.emailupdate.all %}
+              <a class="fa-regular fa-bell-slash fa-2xs bell-icon" href="{% url 'email' currentuser.id %}"></a>
+            {% else %}
+            <a class="fa-solid fa-bell fa-2xs bell-icon bell-icon-active" href="{% url 'email' currentuser.id %}"></a>
+            {% endif %}
+          {% else %}
+            <a class="btn btn-primary btn-sm follow-btn" href="{% url 'profileupdate' user.id %}">Edit</a>
+          {% endif %}
+        </h2>
+        <div class="follow">
+          <b>Followers</b>
+          <br><a href="{% url 'followers' currentuser.id %}">{{ followers }}</a>
+        </div>
+        <div class="follow">
+          <b>Following</b>
+          <br><a href="{% url 'following' currentuser.id %}">{{ following }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="media-body">
+      {{ currentuser.profile.bio }}
+    </div>
+</div>
+{% for post in posts %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <small class="text-muted mr-2">{{ post.date_posted|date:"F d, Y" }}</small>
+        {% if post.edited %}
+        <small class="text-muted"><i>Edited</i></small>
+        {% endif %}
+        {% if post.author == user %}
+        <a class="btn btn-secondary btn-sm ml-2 mb-1" href="{% url 'edit' post.id %}">Edit</a>
+        <a class="btn btn-danger btn-sm ml-2 mb-1" href="{% url 'delete' post.id %}">Delete</a>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-content">{{ post.body }}</p>
+      <a class="fa-regular fa-comments comment-button" href="{% url 'comments' post.id %}"></a>
+      {% if post.comment_set.all %}
+      <span class="comment-button">{{ post.comment_set.all.count }}</span>
+      {% endif %}
+    </div>
+    {% if post.author != user and user.profile not in post.reports.all %}
+    <a class="fa-regular fa-flag report-flag" href="{% url 'report' post.id %}"></a>
+    {% elif user.profile in post.reports.all %}
+    <i class="fa-solid fa-flag report-flag"></i>
+    {% endif %}
+  </article>
+{% endfor %}
+{% endblock content %}
