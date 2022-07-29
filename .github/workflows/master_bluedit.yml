@@ -27,6 +27,9 @@ jobs:
           python -m venv venv
           source venv/bin/activate
       
+      - name: Upgrade pip
+        run: pip3 install --upgrade pip3
+
       - name: Install dependencies
         run: pip3 install -r requirements.txt
         
