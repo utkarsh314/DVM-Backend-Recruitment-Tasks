@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from . import keyconfig
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = keyconfig.secretkey
+SECRET_KEY = os.environ['secretkey']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,11 +85,11 @@ WSGI_APPLICATION = 'socialmedia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': keyconfig.DBname,
-        'USER': keyconfig.DBuser,
-        'PASSWORD': keyconfig.DBpass,
-        'HOST': keyconfig.DBhost,
-        'PORT': keyconfig.DBport,
+        'NAME': os.environ['DBname'],
+        'USER': os.environ['DBuser'],
+        'PASSWORD': os.environ['DBpass'],
+        'HOST': os.environ['DBhost'],
+        'PORT': os.environ['DBport'],
     }
 }
 
