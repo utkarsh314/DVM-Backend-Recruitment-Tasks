@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/b35189a4-a983-4a39-8aa5-11997b7fcdee/microsoft.web/sites/subscriptions/b35189a4-a983-4a39-8aa5-11997b7fcdee/resourceGroups/Social-media/providers/Microsoft.Web/sites/bluedit",
-    "appService.deploySubpath": "."
-}
