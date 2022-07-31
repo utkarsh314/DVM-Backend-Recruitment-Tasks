@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import Post, Comment, ReportedPost
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-import os
+from socialmedia.keyconfig import *
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -37,10 +37,8 @@ class PostView(generic.CreateView, LoginRequiredMixin):
     def form_valid(self, form):
         form.instance.author = self.request.user
         response = super().form_valid(form)
-        from mailjet_rest import Client  
-        key = os.environ['apikey']
-        secret = os.environ['apisecret']
-        mailjet = Client(auth=(key, secret), version='v3.1')
+        from mailjet_rest import Client
+        mailjet = Client(auth=(apikey, apisecret), version='v3.1')
         data = {}
         data['Globals'] = {
             'From': {
