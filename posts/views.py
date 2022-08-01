@@ -20,7 +20,7 @@ class HomeView(generic.ListView, LoginRequiredMixin):
 
     def get_queryset(self):
         if self.request.user.profile.following.all():
-            queryset = Post.objects.filter(author__in=self.request.user.profile.following.all())
+            queryset = Post.objects.filter(author__in=self.request.user.profile.following.all()).order_by('-date_posted')
         else:
             queryset = Post.objects.order_by('-date_posted')[:10]
         return queryset
