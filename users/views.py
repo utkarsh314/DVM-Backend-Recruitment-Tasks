@@ -26,7 +26,7 @@ def profile(request, pk):
     currentuser = get_object_or_404(User, id=pk)
     following = currentuser.profile.following.all().count()
     followers = currentuser.followers.all().count()
-    posts = Post.objects.filter(author=currentuser)
+    posts = Post.objects.filter(author=currentuser).order_by('-date_posted')
 
     context = {
         'currentuser': currentuser,
