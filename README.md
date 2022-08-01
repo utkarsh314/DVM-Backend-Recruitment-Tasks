@@ -1,5 +1,6 @@
 # DVM-Backend-Recruitment-Task - (A Social Media Website)
 
+You can now check out this project on [bluedit.social](https://bluedit.social)!
 ### Aim
 1. The Django polls app tutorial is only a way to get introduced to Django. It's not enough if you want to be able say that you actually "know" Django. So here, we are going to give you an opportunity to really learn Django and show us what you can do. This project will help/make you build proficiency in Django by having to create a full out project: a social media/blog kind of application.
 
