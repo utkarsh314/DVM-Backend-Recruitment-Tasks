@@ -27,7 +27,7 @@ SECRET_KEY = secretkey
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = debug
 
-ALLOWED_HOSTS = ['20.193.133.45', 'bluedit.social', 'localhost']
+ALLOWED_HOSTS = ['20.193.133.45', 'bluedit.social', 'localhost', 'django']
 
 
 # Application definition

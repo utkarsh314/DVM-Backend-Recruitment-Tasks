@@ -25,6 +25,7 @@ et-xmlfile==1.1.0
 executing==0.8.3
 fonttools==4.29.1
 fpdf==1.7.2
+gunicorn==20.1.0
 idna==3.3
 ipykernel==6.9.1
 ipython==8.1.1
