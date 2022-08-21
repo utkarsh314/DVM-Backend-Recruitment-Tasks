@@ -167,4 +167,4 @@ LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 
-CSRF_TRUSTED_ORIGINS = ['http://20.193.155.212']
+CSRF_TRUSTED_ORIGINS = ['http://bluedit.tech']

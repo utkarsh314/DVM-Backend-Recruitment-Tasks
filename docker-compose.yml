@@ -10,6 +10,7 @@ services:
       - media:/socialmedia/media
     depends_on:
       - postgres
+    restart: always
   
   postgres:
     image: postgres
@@ -17,6 +18,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     env_file:
       - .env
+    restart: always
 
   nginx:
     build: ./nginx
@@ -27,6 +29,7 @@ services:
       - "80:80"
     depends_on:
       - django
+    restart: always
 
 volumes:
   static:
